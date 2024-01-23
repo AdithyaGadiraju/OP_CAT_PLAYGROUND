@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+<div class="border-div">
+  <div class="content">
+    <div class="heading">
+      <p class="no-margin">OP_CAT with Quantam Cats</p>
+    </div>
+    <div id="stack" class="stack">
+      <div class="stack-item">
+        <img class="cat-img" src="https://www.quantumcats.xyz/collection/cat0180.png"></div>
+      </div>
+      <div class="button-container">
+        <button class="button" onclick="opCode()">
+          Use OP_CAT Opcode
+        </button>
+        <button class="button" onclick="addCat()">
+          Add Cat to Stack
+        </button>
+        <button class="button" onclick="removeCats()">
+          Remove Cats
+        </button>
+      </div>
+    </div>
+  </div>
+</html>
+
+<!-- TODO: -->
+<!-- Code joining stack functionality -->
+<!-- Add max limit for stack item -->
+<!-- Add max limit for stack -->
+<!-- Screen width responsiveness for the scanner website -->
+<script>
+const addCat = () => {
+ const stack = document.getElementById("stack");
+ const newStackItem = document.createElement("div");
+ newStackItem.classList.add("stack-item");
+ const newCatImg = document.createElement("img");
+ newCatImg.src = "https://www.quantumcats.xyz/collection/cat0180.png";
+ newCatImg.classList.add("cat-img")
+ newStackItem.appendChild(newCatImg);
+ stack.appendChild(newStackItem);
+}
+
+const opCode = () => {
+  const stack = document.getElementById("stack");
+  if (stack.childElementCount <= 1) {
+    return;
+  }
+
+  const lastElement = stack.lastElementChild;
+  const secondLast = lastElement.previousElementSibling;
+  const totalCountOfCats = lastElement.childElementCount + secondLast.childElementCount;
+
+  lastElement.remove()
+  secondLast.remove()
+
+  console.log(lastElement)
+  console.log(secondLast)
+
+  const newStackItem = document.createElement("div");
+  newStackItem.classList.add("stack-item");
+
+  for (i = 0; i < totalCountOfCats; i++ ) {
+    const newCatImg = document.createElement("img");
+    newCatImg.src = "https://www.quantumcats.xyz/collection/cat0180.png";
+    newCatImg.classList.add("cat-img")
+    newStackItem.appendChild(newCatImg);
+  }
+
+  if (newStackItem.childElementCount > 15) {
+    alert("Stack item meow limit reached!, Clear the stack.")
+    return;
+  }
+
+  stack.appendChild(newStackItem);
+}
+
+const removeCats = () => {
+  const stack = document.getElementById("stack");
+  stack.innerHTML = "";
+}
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+  }
+  
+  .content{
+    background-color: whitesmoke;
+    height: 100%;
+    border: 3px solid #f7931a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .no-margin {
+    margin: 0px
+  }
+
+  .button {
+    background: #f7931a;
+    border-radius: 999px;
+    box-shadow: #f7931a 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+    margin-top: 10px;
+    border: 2px solid black;
+  }
+
+  .cat-img {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+  }
+
+  .border-div {
+    height: 100%;
+  }
+
+  .button-container {
+    display: flex;
+    min-width: 20%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stack {
+    display: flex;
+    border: 2px solid black;
+    height: 50%;
+    width: 35%;
+    max-width: 35%;
+    margin: 20px 0px;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 5px;
+    overflow: hidden;
+    overflow: hidden;
+  }
+
+  .stack-item {
+    display: flex;
+    justify-content: center;
+  }
+
+  .heading {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    margin: 10px 0px;
+  }
+</style>
+
